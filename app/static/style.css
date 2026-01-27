@@ -1,0 +1,31 @@
+* { box-sizing: border-box; }
+body { font-family: system-ui, sans-serif; max-width: 900px; margin: 0 auto; padding: 1rem; }
+header { margin-bottom: 1.5rem; border-bottom: 1px solid #ddd; }
+header a { color: #333; text-decoration: none; }
+
+.search-form { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; }
+.search-form input { flex: 1; padding: 0.5rem 0.75rem; font-size: 1rem; }
+.search-form button { padding: 0.5rem 1rem; cursor: pointer; }
+
+.product-list { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
+.card { border: 1px solid #eee; border-radius: 8px; overflow: hidden; }
+.card a { text-decoration: none; color: inherit; display: block; }
+.card-img { width: 100%; height: 120px; object-fit: cover; background: #f0f0f0; }
+.card-body { padding: 0.5rem 0.75rem; }
+.card-body h3 { margin: 0 0 0.25rem; font-size: 0.95rem; }
+.meta { font-size: 0.8rem; color: #666; }
+
+.product-detail { margin-bottom: 2rem; }
+.product-head { display: flex; gap: 1.5rem; margin-bottom: 1.5rem; }
+.product-img { width: 200px; height: 280px; object-fit: cover; border-radius: 8px; }
+.product-head h1 { margin: 0 0 0.5rem; }
+.year { color: #666; margin: 0; }
+.attrs { display: grid; grid-template-columns: auto 1fr; gap: 0.25rem 1rem; margin: 0.5rem 0 0; font-size: 0.9rem; }
+.attrs dt { color: #666; }
+.description { margin-bottom: 1.5rem; }
+.description p { white-space: pre-wrap; }
+.offers ul { list-style: none; padding: 0; }
+.offers li { display: flex; align-items: center; gap: 1rem; padding: 0.5rem 0; border-bottom: 1px solid #eee; }
+.offers .site { font-weight: 600; min-width: 80px; }
+.offers .price { min-width: 100px; }
+.offers a { color: #07c; }

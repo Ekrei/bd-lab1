@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Поиск — Каталог игр{% endblock %}
+{% block content %}
+  <form method="get" action="/" class="search-form">
+    <input type="search" name="q" value="{{ q }}" placeholder="Название игры..." autofocus>
+    <button type="submit">Найти</button>
+  </form>
+
+  {% if q %}
+  <h2>Результаты по запросу «{{ q }}»</h2>
+  {% if results %}
+  <ul class="product-list">
+    {% for r in results %}
+    <li class="card">
+      <a href="/product/{{ r.id }}">
+        <img src="{{ r.image_url or '/static/placeholder.svg' }}" alt="" class="card-img" loading="lazy">
+        <div class="card-body">
+          <h3>{{ r.canonical_name }}</h3>
+          <span class="meta">
+            {% if r.release_year %}{{ r.release_year }}{% endif %}
+            {% if r.min_price is not none %}
+              · от {{ "%.2f"|format(r.min_price) }} {{ r.min_currency or 'USD' }}
+            {% else %}
+              · цена не указана
+            {% endif %}
+          </span>
+        </div>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p>Ничего не найдено.</p>
+  {% endif %}
+  {% else %}
+  <p>Введите запрос в строку поиска.</p>
+  {% endif %}
+{% endblock %}

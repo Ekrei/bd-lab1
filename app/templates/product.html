@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}{{ product.canonical_name }} — Каталог игр{% endblock %}
+{% block content %}
+  <article class="product-detail">
+    <div class="product-head">
+      <img src="{{ product.image_url or '/static/placeholder.svg' }}" alt="" class="product-img">
+      <div>
+        <h1>{{ product.canonical_name }}</h1>
+        {% if product.release_year %}<p class="year">Год выхода: {{ product.release_year }}</p>{% endif %}
+        {% if attributes %}
+        <dl class="attrs">
+          {% for a in attributes %}
+          <dt>{{ a.attribute_name }}</dt>
+          <dd>{{ a.attribute_value }}</dd>
+          {% endfor %}
+        </dl>
+        {% endif %}
+      </div>
+    </div>
+    {% if product.description %}
+    <section class="description">
+      <h2>Описание</h2>
+      <p>{{ product.description }}</p>
+    </section>
+    {% endif %}
+    <section class="offers">
+      <h2>Где купить</h2>
+      <ul>
+        {% for o in offers %}
+        <li>
+          <span class="site">{{ o.website_name }}</span>
+          {% if o.price is not none %}
+            <span class="price">{{ "%.2f"|format(o.price) }} {{ o.price_currency or 'USD' }}</span>
+          {% else %}
+            <span class="price">—</span>
+          {% endif %}
+          <a href="{{ o.url }}" target="_blank" rel="noopener">Перейти</a>
+        </li>
+        {% endfor %}
+      </ul>
+    </section>
+  </article>
+  <p><a href="/">← К поиску</a></p>
+{% endblock %}
