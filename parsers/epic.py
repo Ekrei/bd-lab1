@@ -25,7 +25,8 @@ class EpicParser(BaseParser):
     source_name = "epic"
 
     def fetch_all(self, limit: int = 1000) -> list[CatalogItem]:
-        items = self._fetch_via_graphql(limit)
+        # items = self._fetch_via_graphql(limit)
+        items = []
         if len(items) >= limit:
             return items[:limit]
         # Добираем или подменяем через Playwright при необходимости
@@ -85,19 +86,23 @@ class EpicParser(BaseParser):
             for _ in range(50):
                 if len(items) >= need:
                     break
-                cards = page.query_selector_all('a[href*="/p/"]')
+                cards = page.query_selector_all('a')
+                print(f"Found {len(cards)} cards")
                 for card in cards:
                     if len(items) >= need:
                         break
                     href = card.get_attribute("href") or ""
+                    print(f"href: {href}")
                     if not href or href in seen:
                         continue
                     seen.add(href)
                     slug = href.split("/p/")[-1].strip("/").split("?")[0]
+                    print(f"slug: {slug}")
                     if not slug or len(slug) < 2:
                         continue
                     title_el = card.query_selector("span, [class*='title'], [class*='Title']")
                     title = (title_el.inner_text() if title_el else "").strip() or slug
+                    print(f"title: {title}")
                     img = card.query_selector("img[src]")
                     img_url = (img.get_attribute("src") or "") if img else ""
                     url = f"{STORE_PREFIX}{slug}" if not href.startswith("http") else href
