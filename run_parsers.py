@@ -18,7 +18,7 @@ def run():
     RAW_DIR.mkdir(parents=True, exist_ok=True)
 
     for name, parser_cls in [
-        ("steam", SteamParser),
+        # ("steam", SteamParser),
         ("gog", GOGParser),
         ("epic", EpicParser),
     ]:

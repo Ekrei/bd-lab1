@@ -81,7 +81,13 @@ class GOGParser(BaseParser):
         final = price_info.get("final")
         price = None
         if final is not None:
-            price = float(final) / 100.0
+            if isinstance(final, str):
+                try:
+                    price = float(final.replace("$", "").replace("€", "").replace(",", "."))
+                except ValueError:
+                    price = None
+            else:
+                price = float(final) / 100.0
         currency = (price_info.get("finalMoney") or {}).get("currency", "USD")
 
         release = p.get("releaseDate") or p.get("storeReleaseDate") or ""
