@@ -86,7 +86,11 @@ class EpicParser(BaseParser):
             for _ in range(50):
                 if len(items) >= need:
                     break
+<<<<<<< HEAD
                 cards = page.query_selector_all('a[href*="/p/"]')
+=======
+                cards = page.query_selector_all('a')
+>>>>>>> 2f7ef0293347d0c2536bc62a5daae680067c6a64
                 print(f"Found {len(cards)} cards")
                 for card in cards:
                     if len(items) >= need:
